@@ -12,7 +12,7 @@
         }
 
         body {
-            /* Fondo de pantalla ajustado verticalmente */
+            /* Fondo de pantalla del paisaje lluvioso */
             background: url('paisaje.gif') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -57,13 +57,17 @@
             }
         }
 
-        /* Contenedor sin fondo oscuro general */
+        /* Contenedor transparente (sin fondo ni borde) */
         .container {
             width: 100%;
             max-width: 420px;
             text-align: center;
             position: relative;
             z-index: 2;
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
         }
 
         h1 {
@@ -82,7 +86,7 @@
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tarjetas con fondo semitransparente solo para los párrafos */
+        /* Tarjetas con fondo semitransparente únicamente para las historias */
         .story-box {
             background: rgba(40, 25, 45, 0.55);
             backdrop-filter: blur(12px);
@@ -110,7 +114,7 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        /* Sección de música con su propio fondo */
+        /* Bloque de música */
         .music-note {
             margin-top: 18px;
             padding: 14px;
@@ -126,7 +130,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* Mensaje final sin fondo encajonado */
+        /* Mensaje final */
         .final-message {
             margin-top: 22px;
             font-size: 0.95rem;
