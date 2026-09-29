@@ -24,6 +24,7 @@
             padding: 20px 15px;
         }
 
+        /* Lluvia y cerezas cayendo */
         .rain, .cherry {
             position: fixed;
             top: -50px;
@@ -82,7 +83,7 @@
         .subtitle {
             font-size: 0.95rem;
             color: #f1f1f1;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             font-style: italic;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
         }
@@ -124,11 +125,12 @@
             padding: 0 10px;
         }
 
+        /* Botones estilo cristal */
         .btn {
             display: inline-block;
             width: 100%;
             padding: 14px 20px;
-            margin: 10px 0;
+            margin: 8px 0;
             background: rgba(255, 107, 139, 0.45);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -148,25 +150,14 @@
             background: rgba(255, 107, 139, 0.65);
         }
 
+        .btn-music {
+            background: rgba(46, 213, 115, 0.55);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
         .btn-back {
             background: rgba(255, 255, 255, 0.25);
             margin-top: 20px;
-        }
-
-        /* Botón flotante de música */
-        .music-btn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
         }
 
         .poem-text {
@@ -196,8 +187,7 @@
 </head>
 <body>
 
-    <!-- Control de Audio -->
-    <button class="music-btn" id="toggle-music" onclick="toggleAudio()">🎵 Música: ON</button>
+    <!-- Archivo de Música -->
     <audio id="bg-music" loop preload="auto">
         <source src="mananitas.mp3" type="audio/mpeg">
     </audio>
@@ -208,6 +198,9 @@
         <div id="main-screen" class="screen active">
             <h1>¡Feliz Cumpleaños, Wendy!</h1>
             <div class="subtitle">Bajo las estrellas y la lluvia que tanto te gustan... 🍒✨</div>
+
+            <!-- Botón para reproducir canción -->
+            <button class="btn btn-music" id="musicBtn" onclick="toggleAudio()">🎵 Reproducir canción</button>
 
             <div class="story-box">
                 <h3>✨ Cómo empezó todo</h3>
@@ -223,7 +216,7 @@
                 <p>ME ENCANTARÍA PODER REGALARTE EN PERSONA, SÉ QUE NO PODREMOS VERNOS PERO NO TIENES IDEA DE CÓMO ME ENCANTARÍA DARTE AUNQUE SEA UN ABRAZO, FELIZ CUMPLEAÑOS QUERIDA Y AMADA WENDY 🎉🥳🎂🎉❤️💖✨</p>
             </div>
 
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 15px;">
                 <button class="btn" onclick="showScreen('poem-screen')">📜 Leer Poema de Amor</button>
                 <button class="btn" onclick="showScreen('gift-screen')">🎁 Regalo Pendiente</button>
             </div>
@@ -274,6 +267,7 @@ aprendo de nuevo a volar.</p>
     </div>
 
     <script>
+        // Cambiar entre pantallas
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
@@ -282,6 +276,24 @@ aprendo de nuevo a volar.</p>
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Control de reproducción de música
+        const audio = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    musicBtn.textContent = '⏸ Pausar canción';
+                }).catch(err => {
+                    alert('Asegúrate de tener el archivo mananitas.mp3 en la misma carpeta.');
+                });
+            } else {
+                audio.pause();
+                musicBtn.textContent = '🎵 Reproducir canción';
+            }
+        }
+
+        // Efecto lluvia y cerezas
         function createElements() {
             const body = document.body;
             const isMobile = window.innerWidth <= 600;
@@ -308,32 +320,6 @@ aprendo de nuevo a volar.</p>
                 body.appendChild(cherry);
             }
         }
-
-        const audio = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('toggle-music');
-
-        function startAudioOnInteraction() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    musicBtn.textContent = '🎵 Música: ON';
-                }).catch(() => {});
-            }
-            document.removeEventListener('click', startAudioOnInteraction);
-            document.removeEventListener('touchstart', startAudioOnInteraction);
-        }
-
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                musicBtn.textContent = '🎵 Música: ON';
-            } else {
-                audio.pause();
-                musicBtn.textContent = '🔇 Música: OFF';
-            }
-        }
-
-        document.addEventListener('click', startAudioOnInteraction);
-        document.addEventListener('touchstart', startAudioOnInteraction);
 
         createElements();
     </script>
