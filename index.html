@@ -12,7 +12,6 @@
         }
 
         body {
-            /* Fondo de pantalla del paisaje lluvioso */
             background: url('paisaje.gif') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -25,7 +24,6 @@
             padding: 20px 15px;
         }
 
-        /* Lluvia y cerezas cayendo */
         .rain, .cherry {
             position: fixed;
             top: -50px;
@@ -57,7 +55,6 @@
             }
         }
 
-        /* Contenedores de pantallas */
         .container {
             width: 100%;
             max-width: 420px;
@@ -90,7 +87,6 @@
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tarjetas con fondo semitransparente */
         .story-box {
             background: rgba(40, 25, 45, 0.65);
             backdrop-filter: blur(12px);
@@ -118,7 +114,6 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        /* Mensaje final */
         .final-message {
             margin-top: 22px;
             font-size: 0.95rem;
@@ -129,7 +124,6 @@
             padding: 0 10px;
         }
 
-        /* Botones estilo cristal */
         .btn {
             display: inline-block;
             width: 100%;
@@ -159,7 +153,22 @@
             margin-top: 20px;
         }
 
-        /* Estilo para el poema */
+        /* Botón flotante de música */
+        .music-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
         .poem-text {
             font-style: italic;
             white-space: pre-line;
@@ -168,7 +177,6 @@
             font-size: 0.95rem;
         }
 
-        /* Estilo para la imagen del regalo */
         .gift-img {
             width: 100%;
             max-height: 60vh;
@@ -188,9 +196,10 @@
 </head>
 <body>
 
-    <!-- Audio de Pedro Infante - Las Mañanitas -->
-    <audio id="bg-music" loop autoplay preload="auto">
-        <source src="https://ia800902.us.archive.org/28/items/PedroInfanteLasMananitas/Pedro%20Infante%20-%20Las%20Ma%C3%B1anitas.mp3" type="audio/mpeg">
+    <!-- Control de Audio -->
+    <button class="music-btn" id="toggle-music" onclick="toggleAudio()">🎵 Música: ON</button>
+    <audio id="bg-music" loop preload="auto">
+        <source src="mananitas.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
@@ -265,7 +274,6 @@ aprendo de nuevo a volar.</p>
     </div>
 
     <script>
-        // Navegación entre pantallas
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
@@ -274,7 +282,6 @@ aprendo de nuevo a volar.</p>
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Crear efecto de lluvia y cerezas flotando
         function createElements() {
             const body = document.body;
             const isMobile = window.innerWidth <= 600;
@@ -302,17 +309,31 @@ aprendo de nuevo a volar.</p>
             }
         }
 
-        // Reproducción de música al tocar la pantalla (requerido por navegadores)
         const audio = document.getElementById('bg-music');
-        function playAudio() {
-            if (audio) {
-                audio.play().catch(() => {});
+        const musicBtn = document.getElementById('toggle-music');
+
+        function startAudioOnInteraction() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    musicBtn.textContent = '🎵 Música: ON';
+                }).catch(() => {});
             }
-            document.removeEventListener('click', playAudio);
-            document.removeEventListener('touchstart', playAudio);
+            document.removeEventListener('click', startAudioOnInteraction);
+            document.removeEventListener('touchstart', startAudioOnInteraction);
         }
-        document.addEventListener('click', playAudio);
-        document.addEventListener('touchstart', playAudio);
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.textContent = '🎵 Música: ON';
+            } else {
+                audio.pause();
+                musicBtn.textContent = '🔇 Música: OFF';
+            }
+        }
+
+        document.addEventListener('click', startAudioOnInteraction);
+        document.addEventListener('touchstart', startAudioOnInteraction);
 
         createElements();
     </script>
