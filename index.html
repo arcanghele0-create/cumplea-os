@@ -13,7 +13,7 @@
 
         body {
             /* Fondo de pantalla del paisaje lluvioso */
-            background: url('paisaje.gif') no-repeat center center fixed;
+            background: url('paisaje.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -57,17 +57,21 @@
             }
         }
 
-        /* Contenedor transparente (sin fondo ni borde) */
+        /* Contenedores de pantallas */
         .container {
             width: 100%;
             max-width: 420px;
             text-align: center;
             position: relative;
             z-index: 2;
-            background: none;
-            border: none;
-            box-shadow: none;
-            padding: 0;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
         }
 
         h1 {
@@ -86,9 +90,9 @@
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tarjetas con fondo semitransparente únicamente para las historias */
+        /* Tarjetas con fondo semitransparente */
         .story-box {
-            background: rgba(40, 25, 45, 0.55);
+            background: rgba(40, 25, 45, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -96,7 +100,7 @@
             margin: 14px 0;
             border-radius: 16px;
             text-align: left;
-            line-height: 1.45;
+            line-height: 1.5;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
@@ -114,22 +118,6 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        /* Bloque de música */
-        .music-note {
-            margin-top: 18px;
-            padding: 14px;
-            background: rgba(40, 25, 45, 0.55);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 14px;
-            display: block;
-            font-size: 0.88rem;
-            color: #ffffff;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
         /* Mensaje final */
         .final-message {
             margin-top: 22px;
@@ -137,20 +125,58 @@
             color: #ffffff;
             line-height: 1.5;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.7);
-            font-weight: 500;
+            font-weight: 600;
             padding: 0 10px;
         }
 
-        .heart {
-            color: #ff4757;
+        /* Botones estilo cristal */
+        .btn {
             display: inline-block;
-            animation: pulse 1.5s infinite;
+            width: 100%;
+            padding: 14px 20px;
+            margin: 10px 0;
+            background: rgba(255, 107, 139, 0.45);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+        .btn:active {
+            transform: scale(0.97);
+            background: rgba(255, 107, 139, 0.65);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.25);
+            margin-top: 20px;
+        }
+
+        /* Estilo para el poema */
+        .poem-text {
+            font-style: italic;
+            white-space: pre-line;
+            text-align: center;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Estilo para la imagen del regalo */
+        .gift-img {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
         }
 
         @media (max-width: 480px) {
@@ -162,35 +188,93 @@
 </head>
 <body>
 
+    <!-- Audio de Pedro Infante - Las Mañanitas -->
+    <audio id="bg-music" loop autoplay preload="auto">
+        <source src="https://ia800902.us.archive.org/28/items/PedroInfanteLasMananitas/Pedro%20Infante%20-%20Las%20Ma%C3%B1anitas.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="container">
-        <h1>¡Feliz Cumpleaños, Wendy!</h1>
-        <div class="subtitle">Bajo las estrellas y la lluvia que tanto te gustan... 🍒✨</div>
+        
+        <!-- PANTALLA PRINCIPAL -->
+        <div id="main-screen" class="screen active">
+            <h1>¡Feliz Cumpleaños, Wendy!</h1>
+            <div class="subtitle">Bajo las estrellas y la lluvia que tanto te gustan... 🍒✨</div>
 
-        <div class="story-box">
-            <h3>✨ Cómo empezó todo</h3>
-            <p>El destino decidió cruzarnos a través de una aplicación, sin imaginar que ese simple mensaje cambiaría mi vida por completo y me daría la oportunidad de conocer a una mujer maravillosa.</p>
+            <div class="story-box">
+                <h3>✨ Cómo empezó todo</h3>
+                <p>El destino decidió cruzarnos a través de una aplicación, sin imaginar que ese simple mensaje cambiaría mi vida por completo y me daría la oportunidad de conocer a una mujer maravillosa. Te digo que no solo eres maravillosa, eres increíble, eres espectacular, eres una gran mamá al igual que una gran mujer, no sabes rendirte, pese a lo estresada, cansada y malhumorada que estés, sigues dándolo todo de ti misma por ti y por Dannita, es por eso que te considero una mujer única, porque sigues y sigues trabajando duro, eres esa mujer que hoy en día no se encuentra, pero gracias al destino pude conocerte, pude enamorarme de ti, te pido que no cambies, eres perfecta tal y como eres, sí eres rara a veces y eso es lo que me encanta porque lo bello está en aquello que es diferente y único y para mí tú lo eres.</p>
+            </div>
+
+            <div class="story-box">
+                <h3>👁️ Nuestra primera vez en persona</h3>
+                <p>Recuerdo perfecto cuando me dijiste que estabas mal de tu ojito. Sin pensarlo dos veces, corrí a buscar un oculista y ayudarte. Fue así como nos vimos por primera vez en persona en el consultorio. Ese día supe que haría cualquier cosa por verte bien. Y haría cualquier cosa sin pensarlo ni cuestionarlo, porque lo que más quiero es verte bien, cuidarte, no importa dónde yo esté, correría hasta ti, por lo que sea, no por enamorarte, sino por demostrar que estoy interesado en ti en todo aspecto, no me arrepiento de haber corrido a ese consultorio, porque esa noche pude ver el brillo de la noche sin necesidad del sol, solo con verte iluminaste no solo esa noche sino mi vida.</p>
+            </div>
+
+            <div class="final-message">
+                <p>ME ENCANTARÍA PODER REGALARTE EN PERSONA, SÉ QUE NO PODREMOS VERNOS PERO NO TIENES IDEA DE CÓMO ME ENCANTARÍA DARTE AUNQUE SEA UN ABRAZO, FELIZ CUMPLEAÑOS QUERIDA Y AMADA WENDY 🎉🥳🎂🎉❤️💖✨</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button class="btn" onclick="showScreen('poem-screen')">📜 Leer Poema de Amor</button>
+                <button class="btn" onclick="showScreen('gift-screen')">🎁 Regalo Pendiente</button>
+            </div>
         </div>
 
-        <div class="story-box">
-            <h3>👁️ Nuestra primera vez en persona</h3>
-            <p>Recuerdo perfecto cuando me dijiste que estabas mal de tu ojito. Sin pensarlo dos veces, corrí a buscar un oculista y ayudarte. Fue así como nos vimos por primera vez en persona en el consultorio. Ese día supe que haría cualquier cosa por verte bien.</p>
+        <!-- PANTALLA DEL POEMA -->
+        <div id="poem-screen" class="screen">
+            <div class="story-box">
+                <h3>📜 Un poema para ti</h3>
+                <p class="poem-text">Aunque el viento sople en contra
+y la duda intente anidar,
+mi corazón no se aparta
+de las ganas de luchar.
+
+Dicen que el camino es largo,
+que es muy hondo este dolor,
+pero es más fuerte el impulso
+de este persistente amor.
+
+No me rindo ante la sombra,
+ni ante el frío de un adiós;
+yo prefiero abrir la brecha
+y seguir creyendo en los dos.
+
+Si tropiezo, vuelvo y levanto
+la mirada hacia tu luz;
+amarte es mi gran destino,
+la más dulce y fiel cruz.
+
+No me rindo, te lo juro,
+aunque cueste respirar;
+si se trata de tenerte,
+aprendo de nuevo a volar.</p>
+            </div>
+            <button class="btn btn-back" onclick="showScreen('main-screen')">⬅ Volver atrás</button>
         </div>
 
-        <div class="story-box">
-            <h3>🌸 Dos grandes amores</h3>
-            <p>La vida me regaló no solo la fortuna de conocerte a ti, Wendy, sino también de compartir la vida con tu hermosa hijita, <strong>Danna Victoria</strong>. Las dos se han vuelto lo más importante para mí.</p>
+        <!-- PANTALLA DEL REGALO PENDIENTE -->
+        <div id="gift-screen" class="screen">
+            <div class="story-box" style="text-align: center;">
+                <h3>🌹 Tu regalo pendiente</h3>
+                <img src="rosas.jpg" alt="Rosas para Wendy" class="gift-img">
+                <p style="margin-top: 10px;">Para ti, con todo mi amor...</p>
+            </div>
+            <button class="btn btn-back" onclick="showScreen('main-screen')">⬅ Volver atrás</button>
         </div>
 
-        <div class="music-note">
-            🎧 <em>"Que suene nuestra música favorita de Cafuné mientras celebramos tu día..."</em>
-        </div>
-
-        <div class="final-message">
-            <p>Espero que este cumpleaños esté lleno de dulzura, como tus amadas cerezas y frutos rojos, y que cada deseo que pidas se haga realidad. Te amo con todo mi corazón. <span class="heart">❤️</span></p>
-        </div>
     </div>
 
     <script>
+        // Navegación entre pantallas
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Crear efecto de lluvia y cerezas flotando
         function createElements() {
             const body = document.body;
             const isMobile = window.innerWidth <= 600;
@@ -217,6 +301,18 @@
                 body.appendChild(cherry);
             }
         }
+
+        // Reproducción de música al tocar la pantalla (requerido por navegadores)
+        const audio = document.getElementById('bg-music');
+        function playAudio() {
+            if (audio) {
+                audio.play().catch(() => {});
+            }
+            document.removeEventListener('click', playAudio);
+            document.removeEventListener('touchstart', playAudio);
+        }
+        document.addEventListener('click', playAudio);
+        document.addEventListener('touchstart', playAudio);
 
         createElements();
     </script>
