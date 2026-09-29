@@ -22,7 +22,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px 15px;
         }
 
         /* Lluvia y cerezas cayendo */
@@ -57,49 +57,43 @@
             }
         }
 
-        /* Contenedor principal con efecto de cristal (Glassmorphism) */
+        /* Contenedor sin fondo oscuro general */
         .container {
             width: 100%;
             max-width: 420px;
-            background: rgba(40, 25, 45, 0.45);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1.5px solid rgba(255, 182, 193, 0.4);
-            border-radius: 24px;
-            padding: 24px 18px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             text-align: center;
             position: relative;
             z-index: 2;
         }
 
         h1 {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             color: #ffffff;
             font-weight: 700;
             margin-bottom: 6px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 0, 0, 0.6);
         }
 
         .subtitle {
             font-size: 0.95rem;
             color: #f1f1f1;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             font-style: italic;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
         }
 
-        /* Bloques de la historia */
+        /* Tarjetas con fondo semitransparente solo para los párrafos */
         .story-box {
-            background: rgba(255, 255, 255, 0.22);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 14px 15px;
-            margin: 12px 0;
-            border-radius: 14px;
+            background: rgba(40, 25, 45, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 16px 18px;
+            margin: 14px 0;
+            border-radius: 16px;
             text-align: left;
             line-height: 1.45;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         .story-box h3 {
@@ -107,36 +101,40 @@
             margin-bottom: 6px;
             font-size: 1.05rem;
             font-weight: 700;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
         }
 
         .story-box p {
             color: #f5f5f7;
             font-size: 0.9rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        /* Sección de música */
+        /* Sección de música con su propio fondo */
         .music-note {
             margin-top: 18px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.18);
-            border-radius: 12px;
+            padding: 14px;
+            background: rgba(40, 25, 45, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
             display: block;
             font-size: 0.88rem;
             color: #ffffff;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* Mensaje final */
+        /* Mensaje final sin fondo encajonado */
         .final-message {
-            margin-top: 20px;
+            margin-top: 22px;
             font-size: 0.95rem;
             color: #ffffff;
             line-height: 1.5;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.7);
             font-weight: 500;
+            padding: 0 10px;
         }
 
         .heart {
@@ -176,7 +174,7 @@
 
         <div class="story-box">
             <h3>🌸 Dos grandes amores</h3>
-            <p>La vida me regaló no solo la fortuna de conocerte a ti, Wendy, sino también de compartir la vida con tu hermosa hijita, **Danna Victoria**. Las dos se han vuelto lo más importante para mí.</p>
+            <p>La vida me regaló no solo la fortuna de conocerte a ti, Wendy, sino también de compartir la vida con tu hermosa hijita, <strong>Danna Victoria</strong>. Las dos se han vuelto lo más importante para mí.</p>
         </div>
 
         <div class="music-note">
