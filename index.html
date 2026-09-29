@@ -125,7 +125,7 @@
             padding: 0 10px;
         }
 
-        /* Botones estilo cristal */
+        /* Botones idénticos estilo cristal */
         .btn {
             display: inline-block;
             width: 100%;
@@ -150,11 +150,6 @@
             background: rgba(255, 107, 139, 0.65);
         }
 
-        .btn-music {
-            background: rgba(46, 213, 115, 0.55);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
         .btn-back {
             background: rgba(255, 255, 255, 0.25);
             margin-top: 20px;
@@ -177,12 +172,6 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             margin-bottom: 10px;
         }
-
-        @media (max-width: 480px) {
-            body {
-                background-attachment: scroll;
-            }
-        }
     </style>
 </head>
 <body>
@@ -199,8 +188,8 @@
             <h1>¡Feliz Cumpleaños, Wendy!</h1>
             <div class="subtitle">Bajo las estrellas y la lluvia que tanto te gustan... 🍒✨</div>
 
-            <!-- Botón para reproducir canción -->
-            <button class="btn btn-music" id="musicBtn" onclick="toggleAudio()">🎵 Reproducir canción</button>
+            <!-- BOTÓN DE MÚSICA CON EL MISMO ESTILO QUE LOS OTROS -->
+            <button class="btn" id="musicBtn" onclick="toggleAudio()">🎵 Reproducir canción</button>
 
             <div class="story-box">
                 <h3>✨ Cómo empezó todo</h3>
@@ -267,7 +256,6 @@ aprendo de nuevo a volar.</p>
     </div>
 
     <script>
-        // Cambiar entre pantallas
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
@@ -276,7 +264,6 @@ aprendo de nuevo a volar.</p>
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Control de reproducción de música
         const audio = document.getElementById('bg-music');
         const musicBtn = document.getElementById('musicBtn');
 
@@ -293,7 +280,6 @@ aprendo de nuevo a volar.</p>
             }
         }
 
-        // Efecto lluvia y cerezas
         function createElements() {
             const body = document.body;
             const isMobile = window.innerWidth <= 600;
