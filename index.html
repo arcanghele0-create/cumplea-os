@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Feliz Cumpleaños, Wendy</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-76YJRRL4DX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-76YJRRL4DX');
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -125,7 +136,7 @@
             padding: 0 10px;
         }
 
-        /* Botones idénticos estilo cristal */
+        /* Botones cristal */
         .btn {
             display: inline-block;
             width: 100%;
@@ -188,7 +199,7 @@
             <h1>¡Feliz Cumpleaños, Wendy!</h1>
             <div class="subtitle">Bajo las estrellas y la lluvia que tanto te gustan... 🍒✨</div>
 
-            <!-- BOTÓN DE MÚSICA CON EL MISMO ESTILO QUE LOS OTROS -->
+            <!-- BOTÓN DE MÚSICA CON DISEÑO CRISTAL -->
             <button class="btn" id="musicBtn" onclick="toggleAudio()">🎵 Reproducir canción</button>
 
             <div class="story-box">
@@ -262,6 +273,10 @@ aprendo de nuevo a volar.</p>
             });
             document.getElementById(screenId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', { page_title: screenId });
+            }
         }
 
         const audio = document.getElementById('bg-music');
